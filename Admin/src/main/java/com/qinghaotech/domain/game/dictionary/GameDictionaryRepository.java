@@ -1,0 +1,40 @@
+package com.qinghaotech.domain.game.dictionary;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.qinghaotech.application.model.game.dictionary.GameDictionaryPageQuery;
+import com.qinghaotech.application.model.game.dictionary.GameDictionaryPickerQuery;
+import com.qinghaotech.domain.Entity;
+import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
+
+/**
+ * @author jinx
+ */
+@Repository
+public interface GameDictionaryRepository extends BaseMapper<GameDictionaryEntity> {
+
+    default Page<GameDictionaryEntity> selectPage(GameDictionaryPageQuery query) {
+        // TODO 关联game表
+        Page<GameDictionaryEntity> page = Page.of(query.getCurrent().longValue(), query.getSize().longValue());
+        var wrapper = Wrappers.lambdaQuery(GameDictionaryEntity.class)
+                .eq(StringUtils.hasText(query.getGameId()), GameDictionaryEntity::getGameId, query.getGameId())
+                .eq(GameDictionaryEntity::getGameDictionary, query.getGameDictionary())
+                .like(StringUtils.hasText(query.getName()), GameDictionaryEntity::getName, query.getName())
+                .orderByDesc(Entity::getCreateAt);
+
+        return selectPage(page, wrapper);
+    }
+
+    default Page<GameDictionaryEntity> selectPage(GameDictionaryPickerQuery query) {
+        Page<GameDictionaryEntity> page = Page.of(query.getCurrent().longValue(), query.getSize().longValue());
+        var wrapper = Wrappers.lambdaQuery(GameDictionaryEntity.class)
+                .eq(GameDictionaryEntity::getGameId, query.getGameId())
+                .eq(GameDictionaryEntity::getGameDictionary, query.getGameDictionary())
+                .like(StringUtils.hasText(query.getName()), GameDictionaryEntity::getName, query.getName())
+                .orderByDesc(Entity::getCreateAt);
+
+        return selectPage(page, wrapper);
+    }
+}
