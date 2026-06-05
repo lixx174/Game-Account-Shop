@@ -1,6 +1,6 @@
 package com.qinghaotech.application.service;
 
-import com.qinghaotech.application.convert.GameConverter;
+import com.qinghaotech.application.converter.GameConverter;
 import com.qinghaotech.application.model.PageReply;
 import com.qinghaotech.application.model.game.CreateGameCommand;
 import com.qinghaotech.application.model.game.GameDetailDto;

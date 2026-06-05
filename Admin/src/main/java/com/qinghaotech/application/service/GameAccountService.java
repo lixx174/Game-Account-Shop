@@ -1,6 +1,6 @@
 package com.qinghaotech.application.service;
 
-import com.qinghaotech.application.convert.GameAccountConverter;
+import com.qinghaotech.application.converter.GameAccountConverter;
 import com.qinghaotech.application.model.PageReply;
 import com.qinghaotech.application.model.game.account.CreateGameAccountCommand;
 import com.qinghaotech.application.model.game.account.GameAccountDetailDto;

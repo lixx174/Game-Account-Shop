@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class GameDictionaryEntity extends Entity {
 
-    private String gameId;
+    private Integer gameId;
 
     private GameDictionary gameDictionary;
 
