@@ -1,0 +1,11 @@
+version: '3'
+services:
+  admin:
+    build: ./Admin
+    ports:
+      - "18081:18081"
+
+  app:
+    build: ./App
+    ports:
+      - "18080:18080"
