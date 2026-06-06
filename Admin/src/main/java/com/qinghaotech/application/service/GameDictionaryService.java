@@ -1,6 +1,7 @@
 package com.qinghaotech.application.service;
 
 import com.qinghaotech.application.converter.GameDictionaryConverter;
+import com.qinghaotech.application.model.PageQuery;
 import com.qinghaotech.application.model.PageReply;
 import com.qinghaotech.application.model.game.dictionary.CreateGameDictionaryCommand;
 import com.qinghaotech.application.model.game.dictionary.GameDictionaryDetailDto;
@@ -12,10 +13,13 @@ import com.qinghaotech.application.model.game.dictionary.ModifyGameDictionaryCom
 import com.qinghaotech.domain.game.GameEntity;
 import com.qinghaotech.domain.game.GameRepository;
 import com.qinghaotech.domain.game.dictionary.GameDictionaryEntity;
+import com.qinghaotech.domain.game.dictionary.GameDictionaryQuery;
 import com.qinghaotech.domain.game.dictionary.GameDictionaryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
+import java.util.Collection;
 import java.util.stream.Collectors;
 
 /**
@@ -31,6 +35,11 @@ public class GameDictionaryService {
 
     public PageReply<GameDictionaryPageDto> page(GameDictionaryPageQuery query) {
         var page = repo.selectPage(query);
+
+        if(page.getRecords().isEmpty()){
+            return PageReply.of(query);
+        }
+
         var gameIds = page.getRecords()
                 .stream()
                 .map(GameDictionaryEntity::getGameId)
@@ -51,6 +60,8 @@ public class GameDictionaryService {
     }
 
     public PageReply<GameDictionaryPickerDto> picker(GameDictionaryPickerQuery query) {
+        query.check();
+
         var page = repo.selectPage(query);
         var data = converter.convertToPicker(page.getRecords());
         return PageReply.of(page.getCurrent(), page.getSize(), page.getPages(), data);
@@ -62,13 +73,36 @@ public class GameDictionaryService {
     }
 
     public void create(CreateGameDictionaryCommand command) {
+        GameDictionaryQuery query = GameDictionaryQuery.builder()
+                .gameId(command.getGameId())
+                .gameDictionary(command.getGameDictionary())
+                .name(command.getName())
+                .build();
+        Collection<GameDictionaryEntity> existedEntities = repo.selectByCondition(query);
+
+        Assert.isTrue(existedEntities.isEmpty(), "name:%s 已存在".formatted(command.getName()));
+
         GameDictionaryEntity entity = converter.convert(command);
         repo.insert(entity);
     }
 
     public void modify(ModifyGameDictionaryCommand command) {
-        GameDictionaryEntity entity = converter.convert(command);
-        repo.updateById(entity);
+        GameDictionaryEntity entity = repo.selectById(command.getId());
+        Assert.notNull(entity, "Illegal Id: %s".formatted(command.getId()));
+
+        GameDictionaryQuery query = GameDictionaryQuery.builder()
+                .gameId(entity.getGameId())
+                .gameDictionary(entity.getGameDictionary())
+                .name(command.getName())
+                .build();
+        Collection<GameDictionaryEntity> existedEntities = repo.selectByCondition(query)
+                .stream()
+                .filter(e -> !e.getId().equals(command.getId()))
+                .toList();
+
+        Assert.isTrue(existedEntities.isEmpty(), "name:%s 已存在".formatted(command.getName()));
+
+        repo.updateById(converter.convert(command));
     }
 
     public void remove(Integer id) {

@@ -11,6 +11,7 @@ import com.qinghaotech.domain.game.GameEntity;
 import com.qinghaotech.domain.game.GameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.Collection;
 
@@ -38,9 +39,7 @@ public class GameService {
 
     public void create(CreateGameCommand command) {
         Collection<GameEntity> existedEntities = repo.selectByName(command.getName());
-        if (!existedEntities.isEmpty()) {
-            throw new UnsupportedOperationException("name:%s 已存在".formatted(command.getName()));
-        }
+        Assert.isTrue(existedEntities.isEmpty(), "name:%s 已存在".formatted(command.getName()));
 
         GameEntity entity = converter.convert(command);
         repo.insert(entity);
@@ -52,9 +51,7 @@ public class GameService {
                 .filter(e -> !e.getId().equals(command.getId()))
                 .toList();
 
-        if (!existedEntities.isEmpty()) {
-            throw new UnsupportedOperationException("name:%s 已存在".formatted(command.getName()));
-        }
+        Assert.isTrue(existedEntities.isEmpty(), "name:%s 已存在".formatted(command.getName()));
 
         GameEntity entity = converter.convert(command);
         repo.updateById(entity);

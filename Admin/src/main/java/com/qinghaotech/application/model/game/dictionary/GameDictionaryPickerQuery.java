@@ -4,6 +4,7 @@ import com.qinghaotech.application.model.PageQuery;
 import com.qinghaotech.domain.primitive.GameDictionary;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.util.Assert;
 
 /**
  * @author jinx
@@ -24,4 +25,9 @@ public class GameDictionaryPickerQuery extends PageQuery {
      * 名称
      */
     private String name;
+
+    public void check(){
+        Assert.hasText(gameId, "游戏id为空");
+        Assert.notNull(gameDictionary, "游戏编码为空");
+    }
 }

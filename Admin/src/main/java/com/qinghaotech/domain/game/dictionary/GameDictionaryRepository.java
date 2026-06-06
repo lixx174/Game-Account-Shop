@@ -9,6 +9,8 @@ import com.qinghaotech.domain.Entity;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.util.StringUtils;
 
+import java.util.Collection;
+
 /**
  * @author jinx
  */
@@ -19,7 +21,7 @@ public interface GameDictionaryRepository extends BaseMapper<GameDictionaryEntit
         Page<GameDictionaryEntity> page = Page.of(query.getCurrent().longValue(), query.getSize().longValue());
         var wrapper = Wrappers.lambdaQuery(GameDictionaryEntity.class)
                 .eq(StringUtils.hasText(query.getGameId()), GameDictionaryEntity::getGameId, query.getGameId())
-                .eq(GameDictionaryEntity::getGameDictionary, query.getGameDictionary())
+                .eq(query.getGameDictionary() != null, GameDictionaryEntity::getGameDictionary, query.getGameDictionary())
                 .like(StringUtils.hasText(query.getName()), GameDictionaryEntity::getName, query.getName())
                 .orderByDesc(Entity::getCreateAt);
 
@@ -35,5 +37,14 @@ public interface GameDictionaryRepository extends BaseMapper<GameDictionaryEntit
                 .orderByDesc(Entity::getCreateAt);
 
         return selectPage(page, wrapper);
+    }
+
+    default Collection<GameDictionaryEntity> selectByCondition(GameDictionaryQuery query) {
+        var wrapper = Wrappers.lambdaQuery(GameDictionaryEntity.class)
+                .eq(query.getGameId() != null, GameDictionaryEntity::getGameId, query.getGameId())
+                .eq(query.getGameDictionary() != null, GameDictionaryEntity::getGameDictionary, query.getGameDictionary())
+                .eq(StringUtils.hasText(query.getName()), GameDictionaryEntity::getName, query.getName());
+
+        return selectList(wrapper);
     }
 }

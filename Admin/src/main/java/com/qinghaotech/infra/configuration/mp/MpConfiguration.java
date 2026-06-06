@@ -1,12 +1,16 @@
 package com.qinghaotech.infra.configuration.mp;
 
+import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.qinghaotech.domain.Entity;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.type.LocalDateTimeTypeHandler;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.util.Assert;
@@ -22,6 +26,15 @@ import java.time.LocalDateTime;
 })
 @Configuration
 public class MpConfiguration implements MetaObjectHandler, InitializingBean {
+
+    @Bean
+    public MybatisPlusInterceptor mybatisPlusInterceptor() {
+        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+
+        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
+
+        return interceptor;
+    }
 
     /**
      * 审计字段名
