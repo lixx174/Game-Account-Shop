@@ -12,7 +12,7 @@ import java.util.Collection;
  */
 @Getter
 @Setter
-public class GameAccountPageDto {
+public class GameAccountDetailDto {
     /**
      * id
      */
@@ -22,21 +22,17 @@ public class GameAccountPageDto {
      */
     private String title;
     /**
-     * 账号来源
+     * 账号来源id
      */
     private String originName;
     /**
-     * 账号区服
+     * 账号区服id
      */
     private String serverName;
     /**
      * 游戏系统
      */
     private String systemName;
-    /**
-     * 账号标签
-     */
-    private Collection<String> tags;
     /**
      * 价格
      */
@@ -49,6 +45,10 @@ public class GameAccountPageDto {
      * 政策
      */
     private String policy;
+    /**
+     * 账号截图
+     */
+    private Collection<String> images;
     /**
      * 备注
      */

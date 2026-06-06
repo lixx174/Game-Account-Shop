@@ -3,14 +3,12 @@ package com.qinghaotech.application.model.game;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 /**
  * @author jinx
  */
 @Getter
 @Setter
-public class GameDto {
+public class GamePageDto {
 
     /**
      * id
@@ -24,8 +22,4 @@ public class GameDto {
      * 图标地址
      */
     private String icon;
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createAt;
 }

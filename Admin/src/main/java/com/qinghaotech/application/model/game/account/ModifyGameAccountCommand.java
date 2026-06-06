@@ -21,6 +21,8 @@ public class ModifyGameAccountCommand {
                                     Integer systemId,
                                     Collection<Integer> tagIds,
                                     BigDecimal price,
+                                    String process,
+                                    String policy,
                                     Collection<String> images,
                                     String remark) {
         Assert.notNull(id, "id为空");
@@ -40,6 +42,8 @@ public class ModifyGameAccountCommand {
         this.tagIds = tagIds;
         this.price = price;
         this.images = images;
+        this.process = process;
+        this.policy = policy;
         this.remark = remark;
     }
 
@@ -71,6 +75,14 @@ public class ModifyGameAccountCommand {
      * 价格
      */
     private final BigDecimal price;
+    /**
+     * 流程
+     */
+    private final String process;
+    /**
+     * 政策
+     */
+    private final String policy;
     /**
      * 账号截图
      */

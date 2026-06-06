@@ -41,6 +41,14 @@ public class GameAccountDetailDto {
      */
     private BigDecimal price;
     /**
+     * 流程
+     */
+    private String process;
+    /**
+     * 政策
+     */
+    private String policy;
+    /**
      * 备注
      */
     private String remark;

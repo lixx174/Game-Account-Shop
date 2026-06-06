@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 游戏区服API
+ * 游戏字典API
  *
  * @author jinx
  */
@@ -34,6 +34,7 @@ public class GameDictionaryController {
 
     /**
      * 分页查询
+     *
      * @param query 查询参数
      */
     @GetMapping("/page")
@@ -43,6 +44,7 @@ public class GameDictionaryController {
 
     /**
      * 下拉
+     *
      * @param query 查询参数
      */
     @GetMapping("/picker")

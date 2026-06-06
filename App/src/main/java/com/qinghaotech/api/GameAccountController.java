@@ -2,19 +2,13 @@ package com.qinghaotech.api;
 
 import com.qinghaotech.application.model.PageReply;
 import com.qinghaotech.application.model.Result;
-import com.qinghaotech.application.model.game.account.CreateGameAccountCommand;
 import com.qinghaotech.application.model.game.account.GameAccountDetailDto;
 import com.qinghaotech.application.model.game.account.GameAccountPageDto;
 import com.qinghaotech.application.model.game.account.GameAccountPageQuery;
-import com.qinghaotech.application.model.game.account.ModifyGameAccountCommand;
 import com.qinghaotech.application.service.GameAccountService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -48,35 +42,5 @@ public class GameAccountController {
     @GetMapping("/{id}")
     public Result<GameAccountDetailDto> detail(@PathVariable Integer id) {
         return Result.succeed(service.detail(id));
-    }
-
-    /**
-     * 新增
-     *
-     * @param command 新增参数
-     */
-    @PostMapping
-    public Result<Void> create(@RequestBody CreateGameAccountCommand command) {
-        return Result.succeed(() -> service.create(command));
-    }
-
-    /**
-     * 修改
-     *
-     * @param command 修改参数
-     */
-    @PutMapping
-    public Result<Void> modify(@RequestBody ModifyGameAccountCommand command) {
-        return Result.succeed(() -> service.modify(command));
-    }
-
-    /**
-     * 删除
-     *
-     * @param id id
-     */
-    @DeleteMapping("/{id}")
-    public Result<Void> remove(@PathVariable Integer id) {
-        return Result.succeed(() -> service.remove(id));
     }
 }

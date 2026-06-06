@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.Collection;
 
 /**
@@ -42,19 +41,7 @@ public class GameAccountPageDto {
      */
     private BigDecimal price;
     /**
-     * 流程
+     * 标题图
      */
-    private String process;
-    /**
-     * 政策
-     */
-    private String policy;
-    /**
-     * 备注
-     */
-    private String remark;
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createAt;
+    private String img;
 }

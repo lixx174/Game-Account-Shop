@@ -1,0 +1,5 @@
+### 1. 分页查询游戏账号
+GET {{host}}/api/game-account/page?gameId=4
+
+### 2. 查询游戏账号详情
+GET {{host}}/api/game-account/1

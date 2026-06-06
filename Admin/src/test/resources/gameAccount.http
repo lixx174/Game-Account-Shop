@@ -31,10 +31,12 @@ Content-Type: application/json
   "id": 1,
   "title": "超级牛逼的账号Title_modify",
   "originId": 1,
-  "serverId": 1,
-  "systemId": 1,
-  "tagIds": [1, 2],
+  "serverId": 3,
+  "systemId": 6,
+  "tagIds": [10, 11],
   "price": 199.99,
+  "process": "下单支付 > 验号换绑 > 交易成功",
+  "policy": "不支持未成年人购买",
   "images": [
     "https://example.com/new-image1.jpg",
     "https://example.com/new-image2.jpg"

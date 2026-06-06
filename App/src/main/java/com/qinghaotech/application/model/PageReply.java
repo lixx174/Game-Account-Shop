@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Collection;
+import java.util.Collections;
 
 /**
  * 分页响应模型
@@ -34,5 +35,9 @@ public class PageReply<T> {
 
     public static <T> PageReply<T> of(Number current, Number size, Number pages, Collection<T> records) {
         return new PageReply<>(current, size, pages, records);
+    }
+
+    public static <T> PageReply<T> of(PageQuery query) {
+        return of(query.getCurrent(), query.getSize(), 0, Collections.emptyList());
     }
 }

@@ -22,6 +22,8 @@ public class CreateGameAccountCommand {
                                     Collection<Integer> tagIds,
                                     BigDecimal price,
                                     Collection<String> images,
+                                    String process,
+                                    String policy,
                                     String remark) {
         Assert.notNull(gameId, "游戏id为空");
         Assert.hasText(title, "游戏标题为空");
@@ -40,6 +42,8 @@ public class CreateGameAccountCommand {
         this.tagIds = tagIds;
         this.price = price;
         this.images = images;
+        this.process = process;
+        this.policy = policy;
         this.remark = remark;
     }
 
@@ -71,6 +75,14 @@ public class CreateGameAccountCommand {
      * 价格
      */
     private final BigDecimal price;
+    /**
+     * 流程
+     */
+    private final String process;
+    /**
+     * 政策
+     */
+    private final String policy;
     /**
      * 账号截图
      */
