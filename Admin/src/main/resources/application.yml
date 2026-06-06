@@ -11,3 +11,9 @@ spring:
     url: jdbc:mysql://mysql:3306/game_account_shop?useUnicode=true&characterEncoding=utf-8&isSSL=false
     username: root
     password: root
+
+qinghaotech:
+  aliyun-oss:
+    region: cn-chengdu
+    endpoint: oss-cn-chengdu.aliyuncs.com
+    bucket: game-account-shop

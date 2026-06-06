@@ -14,6 +14,8 @@ dependencies {
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
     implementation 'com.baomidou:mybatis-plus-spring-boot3-starter:3.5.7'
 
+    implementation 'com.aliyun:alibabacloud-oss-v2:0.4.0'
+
     runtimeOnly 'com.mysql:mysql-connector-j'
 
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
