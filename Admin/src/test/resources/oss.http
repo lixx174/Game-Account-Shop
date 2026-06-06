@@ -3,8 +3,8 @@ POST {{host}}/admin/oss/upload
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
 --WebAppBoundary
-Content-Disposition: form-data; name="file"; filename="tt.JPG"
+Content-Disposition: form-data; name="file"; filename="tt.jpg"
 Content-Type: image/jpeg
 
-< ./tt.JPG
+< ./tt.jpg
 --WebAppBoundary--

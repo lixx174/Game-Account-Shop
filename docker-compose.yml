@@ -2,13 +2,18 @@ version: '3'
 services:
   admin:
     build: ./Admin
+    container_name: admin
     ports:
       - "18081:18081"
+    environment:
+      - OSS_ACCESS_KEY_ID=${OSS_ACCESS_KEY_ID}
+      - OSS_ACCESS_KEY_SECRET=${OSS_ACCESS_KEY_SECRET}
     depends_on:
       - mysql
 
   app:
     build: ./App
+    container_name: app
     ports:
       - "18080:18080"
     depends_on:
