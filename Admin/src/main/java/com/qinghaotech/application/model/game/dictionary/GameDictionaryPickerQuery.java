@@ -26,7 +26,7 @@ public class GameDictionaryPickerQuery extends PageQuery {
      */
     private String name;
 
-    public void check(){
+    public void check() {
         Assert.hasText(gameId, "游戏id为空");
         Assert.notNull(gameDictionary, "游戏编码为空");
     }

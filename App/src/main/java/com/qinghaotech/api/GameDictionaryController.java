@@ -24,6 +24,7 @@ public class GameDictionaryController {
 
     /**
      * 下拉
+     *
      * @param query 查询参数
      */
     @GetMapping("/picker")

@@ -27,6 +27,11 @@ import java.time.LocalDateTime;
 @Configuration
 public class MpConfiguration implements MetaObjectHandler, InitializingBean {
 
+    /**
+     * 审计字段名
+     */
+    private String createAt, createBy, updateAt, updateBy;
+
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
@@ -35,11 +40,6 @@ public class MpConfiguration implements MetaObjectHandler, InitializingBean {
 
         return interceptor;
     }
-
-    /**
-     * 审计字段名
-     */
-    private String createAt, createBy, updateAt, updateBy;
 
     @Override
     public void insertFill(MetaObject metaObject) {

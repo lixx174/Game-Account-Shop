@@ -13,40 +13,6 @@ import java.util.Collection;
 @Getter
 public class CreateGameAccountCommand {
 
-    @JsonCreator
-    public CreateGameAccountCommand(Integer gameId,
-                                    String title,
-                                    Integer originId,
-                                    Integer serverId,
-                                    Integer systemId,
-                                    Collection<Integer> tagIds,
-                                    BigDecimal price,
-                                    Collection<String> images,
-                                    String process,
-                                    String policy,
-                                    String remark) {
-        Assert.notNull(gameId, "游戏id为空");
-        Assert.hasText(title, "游戏标题为空");
-        Assert.notNull(originId, "游戏来源为空");
-        Assert.notNull(serverId, "游戏区服为空");
-        Assert.notNull(systemId, "游戏系统为空");
-        Assert.notEmpty(tagIds, "游戏标签为空");
-        Assert.notNull(price, "价格为空");
-        Assert.notEmpty(images, "游戏截图为空");
-
-        this.gameId = gameId;
-        this.title = title;
-        this.originId = originId;
-        this.serverId = serverId;
-        this.systemId = systemId;
-        this.tagIds = tagIds;
-        this.price = price;
-        this.images = images;
-        this.process = process;
-        this.policy = policy;
-        this.remark = remark;
-    }
-
     /**
      * 游戏id
      */
@@ -91,4 +57,37 @@ public class CreateGameAccountCommand {
      * 备注
      */
     private final String remark;
+    @JsonCreator
+    public CreateGameAccountCommand(Integer gameId,
+                                    String title,
+                                    Integer originId,
+                                    Integer serverId,
+                                    Integer systemId,
+                                    Collection<Integer> tagIds,
+                                    BigDecimal price,
+                                    Collection<String> images,
+                                    String process,
+                                    String policy,
+                                    String remark) {
+        Assert.notNull(gameId, "游戏id为空");
+        Assert.hasText(title, "游戏标题为空");
+        Assert.notNull(originId, "游戏来源为空");
+        Assert.notNull(serverId, "游戏区服为空");
+        Assert.notNull(systemId, "游戏系统为空");
+        Assert.notEmpty(tagIds, "游戏标签为空");
+        Assert.notNull(price, "价格为空");
+        Assert.notEmpty(images, "游戏截图为空");
+
+        this.gameId = gameId;
+        this.title = title;
+        this.originId = originId;
+        this.serverId = serverId;
+        this.systemId = systemId;
+        this.tagIds = tagIds;
+        this.price = price;
+        this.images = images;
+        this.process = process;
+        this.policy = policy;
+        this.remark = remark;
+    }
 }

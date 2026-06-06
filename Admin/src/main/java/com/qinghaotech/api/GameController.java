@@ -32,6 +32,7 @@ public class GameController {
 
     /**
      * 分页查询
+     *
      * @param query 查询参数
      */
     @GetMapping("/page")

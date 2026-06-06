@@ -14,7 +14,10 @@ Content-Type: application/json
   "originId": 2,
   "serverId": 5,
   "systemId": 6,
-  "tagIds": [10, 11],
+  "tagIds": [
+    10,
+    11
+  ],
   "price": "99.99",
   "images": [
     "https://example.com/image1.jpg",
@@ -33,8 +36,11 @@ Content-Type: application/json
   "originId": 1,
   "serverId": 3,
   "systemId": 6,
-  "tagIds": [10, 11],
-  "price": 199.99,
+  "tagIds": [
+    10,
+    11
+  ],
+  "price": "199.99",
   "process": "下单支付 > 验号换绑 > 交易成功",
   "policy": "不支持未成年人购买",
   "images": [

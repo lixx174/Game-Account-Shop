@@ -10,15 +10,6 @@ import org.springframework.util.Assert;
 @Getter
 public class CreateGameCommand {
 
-    @JsonCreator
-    public CreateGameCommand(String name, String icon) {
-        Assert.hasText(name, "游戏名称为空");
-        Assert.hasText(icon, "游戏图标为空");
-
-        this.name = name;
-        this.icon = icon;
-    }
-
     /**
      * 名称
      */
@@ -27,4 +18,12 @@ public class CreateGameCommand {
      * 图标地址
      */
     private final String icon;
+    @JsonCreator
+    public CreateGameCommand(String name, String icon) {
+        Assert.hasText(name, "游戏名称为空");
+        Assert.hasText(icon, "游戏图标为空");
+
+        this.name = name;
+        this.icon = icon;
+    }
 }

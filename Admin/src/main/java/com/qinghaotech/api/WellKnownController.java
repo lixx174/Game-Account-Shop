@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class WellKnownController {
 
     @GetMapping("/ping")
-    public Result<String> ping(){
+    public Result<String> ping() {
         return Result.succeed("pong");
     }
 }

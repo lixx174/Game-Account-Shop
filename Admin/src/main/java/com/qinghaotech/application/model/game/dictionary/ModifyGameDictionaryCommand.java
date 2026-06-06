@@ -10,16 +10,6 @@ import org.springframework.util.Assert;
 @Getter
 public class ModifyGameDictionaryCommand {
 
-    @JsonCreator
-    public ModifyGameDictionaryCommand(Integer id, String name, String remark) {
-        Assert.notNull(id, "id为空");
-        Assert.hasText(name, "name为空");
-
-        this.id = id;
-        this.name = name;
-        this.remark = remark;
-    }
-
     /**
      * id
      */
@@ -32,4 +22,13 @@ public class ModifyGameDictionaryCommand {
      * 备注
      */
     private final String remark;
+    @JsonCreator
+    public ModifyGameDictionaryCommand(Integer id, String name, String remark) {
+        Assert.notNull(id, "id为空");
+        Assert.hasText(name, "name为空");
+
+        this.id = id;
+        this.name = name;
+        this.remark = remark;
+    }
 }

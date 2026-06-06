@@ -11,18 +11,6 @@ import org.springframework.util.Assert;
 @Getter
 public class CreateGameDictionaryCommand {
 
-    @JsonCreator
-    public CreateGameDictionaryCommand(Integer gameId, GameDictionary gameDictionary, String name, String remark) {
-        Assert.notNull(gameId, "游戏id为空");
-        Assert.notNull(gameDictionary, "游戏字典为空");
-        Assert.hasText(name, "字典内容为空");
-
-        this.gameId = gameId;
-        this.gameDictionary = gameDictionary;
-        this.name = name;
-        this.remark = remark;
-    }
-
     /**
      * 游戏id
      */
@@ -39,4 +27,15 @@ public class CreateGameDictionaryCommand {
      * 备注
      */
     private final String remark;
+    @JsonCreator
+    public CreateGameDictionaryCommand(Integer gameId, GameDictionary gameDictionary, String name, String remark) {
+        Assert.notNull(gameId, "游戏id为空");
+        Assert.notNull(gameDictionary, "游戏字典为空");
+        Assert.hasText(name, "字典内容为空");
+
+        this.gameId = gameId;
+        this.gameDictionary = gameDictionary;
+        this.name = name;
+        this.remark = remark;
+    }
 }

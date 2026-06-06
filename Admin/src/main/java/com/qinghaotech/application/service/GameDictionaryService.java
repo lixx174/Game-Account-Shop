@@ -1,7 +1,6 @@
 package com.qinghaotech.application.service;
 
 import com.qinghaotech.application.converter.GameDictionaryConverter;
-import com.qinghaotech.application.model.PageQuery;
 import com.qinghaotech.application.model.PageReply;
 import com.qinghaotech.application.model.game.dictionary.CreateGameDictionaryCommand;
 import com.qinghaotech.application.model.game.dictionary.GameDictionaryDetailDto;
@@ -36,7 +35,7 @@ public class GameDictionaryService {
     public PageReply<GameDictionaryPageDto> page(GameDictionaryPageQuery query) {
         var page = repo.selectPage(query);
 
-        if(page.getRecords().isEmpty()){
+        if (page.getRecords().isEmpty()) {
             return PageReply.of(query);
         }
 
