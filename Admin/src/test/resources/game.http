@@ -1,0 +1,27 @@
+### 1. 分页查询游戏账号
+GET {{host}}/admin/game/page
+
+### 2. 查询游戏账号详情
+GET {{host}}/admin/game/3
+
+### 3. 新增游戏账号
+POST {{host}}/admin/game
+Content-Type: application/json
+
+{
+  "name": "王者荣耀",
+  "icon": "https://ixxxf"
+}
+
+### 4. 修改游戏账号
+PUT {{host}}/admin/game
+Content-Type: application/json
+
+{
+  "id": 3,
+  "name": "地下城与勇士手游",
+  "icon": "https://xxxx.com"
+}
+
+### 5. 删除游戏账号
+DELETE {{host}}/admin/game/2

@@ -1,0 +1,31 @@
+### 1. 分页查询游戏字典
+GET {{host}}/admin/game-dictionary/page
+
+### 2. 查询游戏字典详情
+GET {{host}}/admin/game-dictionary/3
+
+### 3. 新增游戏字典
+POST {{host}}/admin/game-dictionary
+Content-Type: application/json
+
+{
+  "gameId": 4,
+  "gameDictionary": "ACCOUNT_TAG",
+  "name": "国服最强22222"
+}
+
+### 4. 修改游戏字典
+PUT {{host}}/admin/game-dictionary
+Content-Type: application/json
+
+{
+  "id": 2,
+  "name": "QQ区",
+  "remark": "加个备注"
+}
+
+### 5. 删除游戏字典
+DELETE {{host}}/admin/game-dictionary/12
+
+### 6. 游戏字典Picker
+GET {{host}}/admin/game-dictionary/picker?gameId=4&gameDictionary=ACCOUNT_TAG

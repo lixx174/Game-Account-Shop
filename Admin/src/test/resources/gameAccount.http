@@ -1,0 +1,46 @@
+### 1. 分页查询游戏账号
+GET {{host}}/admin/game-account/page
+
+### 2. 查询游戏账号详情
+GET {{host}}/admin/game-account/1
+
+### 3. 新增游戏账号
+POST {{host}}/admin/game-account
+Content-Type: application/json
+
+{
+  "gameId": 4,
+  "title": "超级牛逼的账号Title",
+  "originId": 2,
+  "serverId": 5,
+  "systemId": 6,
+  "tagIds": [10, 11],
+  "price": "99.99",
+  "images": [
+    "https://example.com/image1.jpg",
+    "https://example.com/image2.jpg"
+  ],
+  "remark": "这是一个测试备注"
+}
+
+### 4. 修改游戏账号
+PUT {{host}}/admin/game-account
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "超级牛逼的账号Title_modify",
+  "originId": 1,
+  "serverId": 1,
+  "systemId": 1,
+  "tagIds": [1, 2],
+  "price": 199.99,
+  "images": [
+    "https://example.com/new-image1.jpg",
+    "https://example.com/new-image2.jpg"
+  ],
+  "remark": "修改后的备注"
+}
+
+### 5. 删除游戏账号
+DELETE {{host}}/admin/game-account/1
