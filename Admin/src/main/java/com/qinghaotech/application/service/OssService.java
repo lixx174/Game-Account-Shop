@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 @Service
@@ -30,7 +28,7 @@ public class OssService {
                 .endpoint(properties.getEndpoint());
 
         try (OSSClient client = clientBuilder.build()) {
-            String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+            String fileName = UUID.randomUUID() + "-" + file.getOriginalFilename();
 
             var request = PutObjectRequest.newBuilder()
                     .bucket(properties.getBucket())
@@ -43,8 +41,7 @@ public class OssService {
                 throw new RuntimeException("OSS upload failed");
             }
 
-            String encodeFilename = URLEncoder.encode(fileName, StandardCharsets.UTF_8);
-            return String.format("https://%s.%s/%s", properties.getBucket(), properties.getEndpoint(), encodeFilename);
+            return String.format("%s/%s", properties.getCustomEndpoint(), fileName);
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }

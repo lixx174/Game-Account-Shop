@@ -17,3 +17,4 @@ qinghaotech:
     region: cn-chengdu
     endpoint: oss-cn-chengdu.aliyuncs.com
     bucket: game-account-shop
+    custom-endpoint: http://oss.qinghaotech.com
