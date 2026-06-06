@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 /**
@@ -47,5 +48,5 @@ public class GameAccountPageDto {
     /**
      * 创建时间
      */
-    private BigDecimal createAt;
+    private LocalDateTime createAt;
 }

@@ -24,11 +24,13 @@ public abstract class Entity {
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createAt;
 
+    @TableField(fill = FieldFill.INSERT)
     private Integer createBy = -1;
 
-    @TableField(fill = FieldFill.INSERT_UPDATE)
+    @TableField(fill = FieldFill.UPDATE)
     private LocalDateTime updateAt;
 
+    @TableField(fill = FieldFill.UPDATE)
     private Integer updateBy = -1;
 
     @TableLogic

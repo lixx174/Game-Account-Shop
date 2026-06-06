@@ -8,42 +8,56 @@ import com.qinghaotech.domain.game.account.GameAccountEntity;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Mappings;
+import org.mapstruct.Named;
 
 import java.util.Collection;
 
 /**
  * @author jinx
  */
-@Mapper
+@Mapper(
+        config = EntityIgnoreConfiguration.class
+)
 public interface GameAccountConverter {
 
-    GameAccountDetailDto convertToDetail(GameAccountEntity entity);
+    @Mappings({
+            @Mapping(target = "originName", source = "originId", qualifiedByName = "resolveId"),
+            @Mapping(target = "serverName", source = "serverId", qualifiedByName = "resolveId"),
+            @Mapping(target = "systemName", source = "systemId", qualifiedByName = "resolveId"),
+            @Mapping(target = "tags", source = "tagIds", qualifiedByName = "resolveIds"),
+    })
+    GameAccountDetailDto convertToDetail(GameAccountEntity entity, @Context IdNameResolver resolver);
 
-    GameAccountPageDto convertToPage(GameAccountEntity entity);
+    @Mappings({
+            @Mapping(target = "originName", source = "originId", qualifiedByName = "resolveId"),
+            @Mapping(target = "serverName", source = "serverId", qualifiedByName = "resolveId"),
+            @Mapping(target = "systemName", source = "systemId", qualifiedByName = "resolveId"),
+            @Mapping(target = "tags", source = "tagIds", qualifiedByName = "resolveIds"),
+    })
+    GameAccountPageDto convertToPage(GameAccountEntity entity, @Context IdNameResolver resolver);
 
-    Collection<GameAccountPageDto> convertToPage(Collection<GameAccountEntity> entities);
+    Collection<GameAccountPageDto> convertToPage(Collection<GameAccountEntity> entities, @Context IdNameResolver resolver);
 
+    @Mappings({
+            @Mapping(target = "id", ignore = true)
+    })
     GameAccountEntity convert(CreateGameAccountCommand command);
 
+    @Mappings({
+            @Mapping(target = "gameId", ignore = true)
+    })
     GameAccountEntity convert(ModifyGameAccountCommand command);
 
-    @AfterMapping
-    default void afterPropertySet(GameAccountEntity entity,
-                                  @MappingTarget GameAccountPageDto dto,
-                                  @Context IdNameResolver resolver) {
-        dto.setOriginName(resolver.resolve(entity.getOriginId()));
-        dto.setServerName(resolver.resolve(entity.getServerId()));
-        dto.setSystemName(resolver.resolve(entity.getSystemId()));
+    @Named("resolveId")
+    default String resolveId(Integer id, @Context IdNameResolver resolver) {
+        return resolver.resolve(id);
     }
 
-    @AfterMapping
-    default void afterPropertySet(GameAccountEntity entity,
-                                  @MappingTarget GameAccountDetailDto dto,
-                                  @Context IdNameResolver resolver) {
-        dto.setOriginName(resolver.resolve(entity.getOriginId()));
-        dto.setServerName(resolver.resolve(entity.getServerId()));
-        dto.setSystemName(resolver.resolve(entity.getSystemId()));
-        dto.setTags(resolver.resolve(entity.getTagIds()));
+    @Named("resolveIds")
+    default Collection<String> resolveIds(Collection<Integer> ids, @Context IdNameResolver resolver) {
+        return resolver.resolve(ids);
     }
 }

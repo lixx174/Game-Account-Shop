@@ -4,13 +4,13 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qinghaotech.application.model.game.account.GameAccountPageQuery;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.util.StringUtils;
 
 /**
  * @author jinx
  */
-@Repository
+@Mapper
 public interface GameAccountRepository extends BaseMapper<GameAccountEntity> {
 
     default Page<GameAccountEntity> selectPage(GameAccountPageQuery query) {

@@ -1,7 +1,6 @@
 package com.qinghaotech.infra.exception;
 
 import com.qinghaotech.application.model.Result;
-import com.qinghaotech.domain.exception.UnprocessableException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -48,14 +47,6 @@ public class GlobalExceptionHandler {
     })
     public Result<Void> badRequestException(Exception e) {
         return Result.fail(HttpStatus.BAD_REQUEST.value(), e.getMessage());
-    }
-
-    @ExceptionHandler({
-            UnsupportedOperationException.class,
-            UnprocessableException.class,
-    })
-    public Result<Void> unprocessableException(UnprocessableException e) {
-        return Result.fail(e.getCode(), e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)

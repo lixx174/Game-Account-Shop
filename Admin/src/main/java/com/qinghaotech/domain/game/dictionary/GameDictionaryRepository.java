@@ -6,17 +6,16 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qinghaotech.application.model.game.dictionary.GameDictionaryPageQuery;
 import com.qinghaotech.application.model.game.dictionary.GameDictionaryPickerQuery;
 import com.qinghaotech.domain.Entity;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.util.StringUtils;
 
 /**
  * @author jinx
  */
-@Repository
+@Mapper
 public interface GameDictionaryRepository extends BaseMapper<GameDictionaryEntity> {
 
     default Page<GameDictionaryEntity> selectPage(GameDictionaryPageQuery query) {
-        // TODO 关联game表
         Page<GameDictionaryEntity> page = Page.of(query.getCurrent().longValue(), query.getSize().longValue());
         var wrapper = Wrappers.lambdaQuery(GameDictionaryEntity.class)
                 .eq(StringUtils.hasText(query.getGameId()), GameDictionaryEntity::getGameId, query.getGameId())

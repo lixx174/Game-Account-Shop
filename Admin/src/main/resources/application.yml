@@ -8,6 +8,6 @@ spring:
     name: Game-Account-Shop-Admin
 
   datasource:
-    url: jdbc:mysql://localhost:3306/play_buddy?useUnicode=true&characterEncoding=utf-8&isSSL=false
+    url: jdbc:mysql://localhost:3306/game_account_shop?useUnicode=true&characterEncoding=utf-8&isSSL=false
     username: root
     password: root
