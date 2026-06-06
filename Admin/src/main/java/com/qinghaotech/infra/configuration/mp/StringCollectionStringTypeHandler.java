@@ -17,26 +17,26 @@ import java.util.Collection;
  */
 @MappedTypes(Collection.class)
 @MappedJdbcTypes(JdbcType.VARCHAR)
-public class CollectionStringTypeHandler extends BaseTypeHandler<Collection<?>> {
+public class StringCollectionStringTypeHandler extends BaseTypeHandler<Collection<String>> {
 
 
     @Override
-    public void setNonNullParameter(PreparedStatement ps, int i, Collection<?> parameter, JdbcType jdbcType) throws SQLException {
+    public void setNonNullParameter(PreparedStatement ps, int i, Collection<String> parameter, JdbcType jdbcType) throws SQLException {
         ps.setString(i, StringUtils.collectionToCommaDelimitedString(parameter));
     }
 
     @Override
-    public Collection<?> getNullableResult(ResultSet rs, String columnName) throws SQLException {
+    public Collection<String> getNullableResult(ResultSet rs, String columnName) throws SQLException {
         return StringUtils.commaDelimitedListToSet(rs.getString(columnName));
     }
 
     @Override
-    public Collection<?> getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
+    public Collection<String> getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
         return StringUtils.commaDelimitedListToSet(rs.getString(columnIndex));
     }
 
     @Override
-    public Collection<?> getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
+    public Collection<String> getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
         return StringUtils.commaDelimitedListToSet(cs.getString(columnIndex));
     }
 }

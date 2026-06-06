@@ -16,7 +16,7 @@ public interface GameAccountRepository extends BaseMapper<GameAccountEntity> {
     default Page<GameAccountEntity> selectPage(GameAccountPageQuery query) {
         Page<GameAccountEntity> page = Page.of(query.getCurrent().longValue(), query.getSize().longValue());
         var wrapper = Wrappers.lambdaQuery(GameAccountEntity.class)
-                .eq(GameAccountEntity::getGameId, query.getGameId())
+                .eq(query.getGameId() != null, GameAccountEntity::getGameId, query.getGameId())
                 .like(StringUtils.hasText(query.getTitle()), GameAccountEntity::getTitle, query.getTitle());
 
         return selectPage(page, wrapper);

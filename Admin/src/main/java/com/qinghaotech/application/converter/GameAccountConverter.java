@@ -5,11 +5,9 @@ import com.qinghaotech.application.model.game.account.GameAccountDetailDto;
 import com.qinghaotech.application.model.game.account.GameAccountPageDto;
 import com.qinghaotech.application.model.game.account.ModifyGameAccountCommand;
 import com.qinghaotech.domain.game.account.GameAccountEntity;
-import org.mapstruct.AfterMapping;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import org.mapstruct.Named;
 
@@ -23,13 +21,7 @@ import java.util.Collection;
 )
 public interface GameAccountConverter {
 
-    @Mappings({
-            @Mapping(target = "originName", source = "originId", qualifiedByName = "resolveId"),
-            @Mapping(target = "serverName", source = "serverId", qualifiedByName = "resolveId"),
-            @Mapping(target = "systemName", source = "systemId", qualifiedByName = "resolveId"),
-            @Mapping(target = "tags", source = "tagIds", qualifiedByName = "resolveIds"),
-    })
-    GameAccountDetailDto convertToDetail(GameAccountEntity entity, @Context IdNameResolver resolver);
+    GameAccountDetailDto convertToDetail(GameAccountEntity entity);
 
     @Mappings({
             @Mapping(target = "originName", source = "originId", qualifiedByName = "resolveId"),

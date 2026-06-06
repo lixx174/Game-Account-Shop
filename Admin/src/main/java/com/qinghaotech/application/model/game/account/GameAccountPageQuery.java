@@ -12,7 +12,7 @@ import lombok.Setter;
 public class GameAccountPageQuery extends PageQuery {
 
     /**
-     * REQUIRED 游戏id
+     * 游戏id
      */
     private Integer gameId;
     /**

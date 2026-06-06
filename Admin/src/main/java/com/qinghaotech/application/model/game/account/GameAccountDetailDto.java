@@ -21,21 +21,21 @@ public class GameAccountDetailDto {
      */
     private String title;
     /**
-     * 账号来源
+     * 账号来源id
      */
-    private String originName;
+    private Integer originId;
     /**
-     * 账号区服
+     * 账号区服id
      */
-    private String serverName;
+    private Integer serverId;
     /**
      * 游戏系统
      */
-    private String systemName;
+    private Integer systemId;
     /**
-     * 账号标签
+     * 账号标签id
      */
-    private Collection<String> tags;
+    private Collection<Integer> tagIds;
     /**
      * 价格
      */

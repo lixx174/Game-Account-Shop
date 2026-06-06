@@ -55,9 +55,7 @@ public class GameAccountService {
         GameAccountEntity entity = repo.selectById(id);
         Assert.notNull(entity, "Illegal id: %s".formatted(id));
 
-        var gameDictionaryMappings = getGameDictionaryMappings(entity);
-
-        return converter.convertToDetail(entity, gameDictionaryMappings::get);
+        return converter.convertToDetail(entity);
     }
 
     public void create(CreateGameAccountCommand command) {
@@ -74,9 +72,6 @@ public class GameAccountService {
         repo.deleteById(id);
     }
 
-    private Map<Integer, String> getGameDictionaryMappings(GameAccountEntity entity) {
-        return getGameDictionaryMappings(Collections.singleton(entity));
-    }
 
     private Map<Integer, String> getGameDictionaryMappings(Collection<GameAccountEntity> entities) {
         Set<Integer> ids = entities.stream()
