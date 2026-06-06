@@ -14,6 +14,7 @@ import com.qinghaotech.domain.game.dictionary.GameDictionaryEntity;
 import com.qinghaotech.domain.game.dictionary.GameDictionaryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -39,6 +40,10 @@ public class GameAccountService {
     public PageReply<GameAccountPageDto> page(GameAccountPageQuery query) {
         var page = repo.selectPage(query);
 
+        if (page.getRecords().isEmpty()) {
+            return PageReply.of(query);
+        }
+
         var gameDictionaryMappings = getGameDictionaryMappings(page.getRecords());
         var data = converter.convertToPage(page.getRecords(), gameDictionaryMappings::get);
 
@@ -48,6 +53,7 @@ public class GameAccountService {
 
     public GameAccountDetailDto detail(Integer id) {
         GameAccountEntity entity = repo.selectById(id);
+        Assert.notNull(entity, "Illegal id: %s".formatted(id));
 
         var gameDictionaryMappings = getGameDictionaryMappings(entity);
 

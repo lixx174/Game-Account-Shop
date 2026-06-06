@@ -12,6 +12,8 @@ import com.qinghaotech.domain.game.GameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+
 /**
  * @author jinx
  */
@@ -35,11 +37,25 @@ public class GameService {
     }
 
     public void create(CreateGameCommand command) {
+        Collection<GameEntity> existedEntities = repo.selectByName(command.getName());
+        if (!existedEntities.isEmpty()) {
+            throw new UnsupportedOperationException("name:%s 已存在".formatted(command.getName()));
+        }
+
         GameEntity entity = converter.convert(command);
         repo.insert(entity);
     }
 
     public void modify(ModifyGameCommand command) {
+        Collection<GameEntity> existedEntities = repo.selectByName(command.getName())
+                .stream()
+                .filter(e -> !e.getId().equals(command.getId()))
+                .toList();
+
+        if (!existedEntities.isEmpty()) {
+            throw new UnsupportedOperationException("name:%s 已存在".formatted(command.getName()));
+        }
+
         GameEntity entity = converter.convert(command);
         repo.updateById(entity);
     }

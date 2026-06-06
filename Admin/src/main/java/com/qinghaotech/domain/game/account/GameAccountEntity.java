@@ -15,7 +15,7 @@ import java.util.Collection;
  */
 @Getter
 @Setter
-@TableName(autoResultMap = true)
+@TableName(value = "game_account", autoResultMap = true)
 public class GameAccountEntity extends Entity {
 
     private Integer gameId;

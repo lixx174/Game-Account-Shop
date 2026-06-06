@@ -7,6 +7,8 @@ import com.qinghaotech.application.model.game.GamePageQuery;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.util.StringUtils;
 
+import java.util.Collection;
+
 /**
  * @author jinx
  */
@@ -19,5 +21,12 @@ public interface GameRepository extends BaseMapper<GameEntity> {
                 .like(StringUtils.hasText(query.getName()), GameEntity::getName, query.getName());
 
         return selectPage(page, wrapper);
+    }
+
+    default Collection<GameEntity> selectByName(String name) {
+        var wrapper = Wrappers.lambdaQuery(GameEntity.class)
+                .eq(StringUtils.hasText(name), GameEntity::getName, name);
+
+        return selectList(wrapper);
     }
 }

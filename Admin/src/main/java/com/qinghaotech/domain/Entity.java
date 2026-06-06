@@ -22,17 +22,17 @@ public abstract class Entity {
     private Integer id;
 
     @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createAt;
+    private LocalDateTime createAt = LocalDateTime.now();
 
     @TableField(fill = FieldFill.INSERT)
     private Integer createBy = -1;
 
     @TableField(fill = FieldFill.UPDATE)
-    private LocalDateTime updateAt;
+    private LocalDateTime updateAt = LocalDateTime.now();
 
     @TableField(fill = FieldFill.UPDATE)
     private Integer updateBy = -1;
 
     @TableLogic
-    private Boolean isDeleted = true;
+    private Boolean isDeleted = false;
 }

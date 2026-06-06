@@ -1,5 +1,6 @@
 package com.qinghaotech.application.model.game;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
 import org.springframework.util.Assert;
 
@@ -9,6 +10,7 @@ import org.springframework.util.Assert;
 @Getter
 public class CreateGameCommand {
 
+    @JsonCreator
     public CreateGameCommand(String name, String icon) {
         Assert.hasText(name, "游戏名称为空");
         Assert.hasText(icon, "游戏图标为空");
