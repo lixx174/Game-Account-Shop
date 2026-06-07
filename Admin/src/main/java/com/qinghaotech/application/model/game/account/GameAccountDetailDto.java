@@ -49,6 +49,10 @@ public class GameAccountDetailDto {
      */
     private String policy;
     /**
+     * 账号截图
+     */
+    private Collection<String> images;
+    /**
      * 备注
      */
     private String remark;
