@@ -19,6 +19,7 @@ import java.util.Collection;
 @TableName(value = "game_account", autoResultMap = true)
 public class GameAccountEntity extends Entity {
 
+    private String accountNo;
     private Integer gameId;
     private String title;
     private Integer originId;

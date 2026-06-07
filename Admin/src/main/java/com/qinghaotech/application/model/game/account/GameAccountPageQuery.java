@@ -16,6 +16,10 @@ public class GameAccountPageQuery extends PageQuery {
      */
     private Integer gameId;
     /**
+     * 账号编号
+     */
+    private String accountNo;
+    /**
      * 标题
      */
     private String title;

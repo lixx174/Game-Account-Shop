@@ -59,6 +59,16 @@ public class GameAccountService {
     }
 
     public void modify(ModifyGameAccountCommand command) {
+        GameAccountEntity existedEntity = repo.selectById(command.getId());
+        Assert.notNull(existedEntity, "Illegal id: %s".formatted(command.getId()));
+
+        var existedEntities = repo.selectByNo(command.getAccountNo())
+                .stream()
+                .filter(e -> !e.getId().equals(command.getId()))
+                .toList();
+
+        Assert.isTrue(existedEntities.isEmpty(), "账号:%s 已存在".formatted(command.getAccountNo()));
+
         GameAccountEntity entity = converter.convert(command);
         repo.updateById(entity);
     }

@@ -14,6 +14,10 @@ import java.util.Collection;
 public class CreateGameAccountCommand {
 
     /**
+     * 账号编号
+     */
+    private final String accountNo;
+    /**
      * 游戏id
      */
     private final Integer gameId;
@@ -58,7 +62,8 @@ public class CreateGameAccountCommand {
      */
     private final String remark;
     @JsonCreator
-    public CreateGameAccountCommand(Integer gameId,
+    public CreateGameAccountCommand(String accountNo,
+                                    Integer gameId,
                                     String title,
                                     Integer originId,
                                     Integer serverId,
@@ -69,6 +74,7 @@ public class CreateGameAccountCommand {
                                     String process,
                                     String policy,
                                     String remark) {
+        Assert.hasText(accountNo, "账号编号为空");
         Assert.notNull(gameId, "游戏id为空");
         Assert.hasText(title, "游戏标题为空");
         Assert.notNull(originId, "游戏来源为空");
@@ -78,6 +84,7 @@ public class CreateGameAccountCommand {
         Assert.notNull(price, "价格为空");
         Assert.notEmpty(images, "游戏截图为空");
 
+        this.accountNo = accountNo;
         this.gameId = gameId;
         this.title = title;
         this.originId = originId;

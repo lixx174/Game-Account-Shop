@@ -18,6 +18,10 @@ public class ModifyGameAccountCommand {
      */
     private final Integer id;
     /**
+     * 账号编号
+     */
+    private final String accountNo;
+    /**
      * 标题
      */
     private final String title;
@@ -59,6 +63,7 @@ public class ModifyGameAccountCommand {
     private final String remark;
     @JsonCreator
     public ModifyGameAccountCommand(Integer id,
+                                    String accountNo,
                                     String title,
                                     Integer originId,
                                     Integer serverId,
@@ -70,6 +75,7 @@ public class ModifyGameAccountCommand {
                                     Collection<String> images,
                                     String remark) {
         Assert.notNull(id, "id为空");
+        Assert.hasText(accountNo, "账号编号为空");
         Assert.hasText(title, "游戏标题为空");
         Assert.notNull(originId, "游戏来源为空");
         Assert.notNull(serverId, "游戏区服为空");
@@ -79,6 +85,7 @@ public class ModifyGameAccountCommand {
         Assert.notEmpty(images, "游戏截图为空");
 
         this.id = id;
+        this.accountNo = accountNo;
         this.title = title;
         this.originId = originId;
         this.serverId = serverId;

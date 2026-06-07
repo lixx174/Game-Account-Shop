@@ -17,6 +17,10 @@ public class GameAccountDetailDto {
      */
     private Integer id;
     /**
+     * 账号编号
+     */
+    private String accountNo;
+    /**
      * 标题
      */
     private String title;

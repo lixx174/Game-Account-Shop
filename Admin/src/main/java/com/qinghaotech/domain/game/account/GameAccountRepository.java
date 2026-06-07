@@ -7,6 +7,8 @@ import com.qinghaotech.application.model.game.account.GameAccountPageQuery;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.util.StringUtils;
 
+import java.util.Collection;
+
 /**
  * @author jinx
  */
@@ -20,5 +22,12 @@ public interface GameAccountRepository extends BaseMapper<GameAccountEntity> {
                 .like(StringUtils.hasText(query.getTitle()), GameAccountEntity::getTitle, query.getTitle());
 
         return selectPage(page, wrapper);
+    }
+
+    default Collection<GameAccountEntity> selectByNo(String accountNo) {
+        var wrapper = Wrappers.lambdaQuery(GameAccountEntity.class)
+                .eq(GameAccountEntity::getAccountNo, accountNo);
+
+        return selectList(wrapper);
     }
 }
