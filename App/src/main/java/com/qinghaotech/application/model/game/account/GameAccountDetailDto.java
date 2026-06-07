@@ -22,11 +22,15 @@ public class GameAccountDetailDto {
      */
     private String title;
     /**
-     * 账号来源id
+     * 游戏名称
+     */
+    private String gameName;
+    /**
+     * 账号来源
      */
     private String originName;
     /**
-     * 账号区服id
+     * 账号区服
      */
     private String serverName;
     /**

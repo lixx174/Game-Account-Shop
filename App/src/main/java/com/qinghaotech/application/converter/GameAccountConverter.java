@@ -18,6 +18,7 @@ import java.util.Collection;
 public interface GameAccountConverter {
 
     @Mappings({
+            @Mapping(target = "gameName", source = "gameId", qualifiedByName = "resolveId"),
             @Mapping(target = "originName", source = "originId", qualifiedByName = "resolveId"),
             @Mapping(target = "serverName", source = "serverId", qualifiedByName = "resolveId"),
             @Mapping(target = "systemName", source = "systemId", qualifiedByName = "resolveId"),
