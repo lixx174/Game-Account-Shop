@@ -11,3 +11,6 @@ spring:
     url: jdbc:mysql://mysql:3306/game_account_shop?useUnicode=true&characterEncoding=utf-8&isSSL=false
     username: root
     password: root
+
+qinghaotech:
+  customer-endpoint:

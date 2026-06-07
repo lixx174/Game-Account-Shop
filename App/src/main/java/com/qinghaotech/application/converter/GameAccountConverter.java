@@ -25,15 +25,19 @@ public interface GameAccountConverter {
     GameAccountDetailDto convertToDetail(GameAccountEntity entity, String gameName, @Context IdNameResolver resolver);
 
     @Mappings({
-            @Mapping(target = "originName", source = "originId", qualifiedByName = "resolveId"),
-            @Mapping(target = "serverName", source = "serverId", qualifiedByName = "resolveId"),
-            @Mapping(target = "systemName", source = "systemId", qualifiedByName = "resolveId"),
-            @Mapping(target = "tags", source = "tagIds", qualifiedByName = "resolveIds"),
-            @Mapping(target = "img", source = "images", qualifiedByName = "resolveImg"),
+            @Mapping(target = "originName", source = "entity.originId", qualifiedByName = "resolveId"),
+            @Mapping(target = "serverName", source = "entity.serverId", qualifiedByName = "resolveId"),
+            @Mapping(target = "systemName", source = "entity.systemId", qualifiedByName = "resolveId"),
+            @Mapping(target = "tags", source = "entity.tagIds", qualifiedByName = "resolveIds"),
+            @Mapping(target = "img", source = "entity.images", qualifiedByName = "resolveImg"),
     })
-    GameAccountPageDto convertToPage(GameAccountEntity entity, @Context IdNameResolver resolver);
+    GameAccountPageDto convertToPage(GameAccountEntity entity,
+                                     String customerEndpoint,
+                                     @Context IdNameResolver resolver);
 
-    Collection<GameAccountPageDto> convertToPage(Collection<GameAccountEntity> entities, @Context IdNameResolver resolver);
+    Collection<GameAccountPageDto> convertToPage(Collection<GameAccountEntity> entities,
+                                                 String customerEndpoint,
+                                                 @Context IdNameResolver resolver);
 
 
     @Named("resolveId")

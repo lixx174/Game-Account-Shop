@@ -1,5 +1,6 @@
 package com.qinghaotech.application.service;
 
+import com.qinghaotech.AppConfiguration;
 import com.qinghaotech.application.converter.GameAccountConverter;
 import com.qinghaotech.application.model.PageReply;
 import com.qinghaotech.application.model.game.account.GameAccountDetailDto;
@@ -33,6 +34,7 @@ public class GameAccountService {
     private final GameDictionaryRepository gdRepo;
     private final GameRepository gRepo;
     private final GameAccountConverter converter;
+    private final AppConfiguration configuration;
 
     public PageReply<GameAccountPageDto> page(GameAccountPageQuery query) {
         query.check();
@@ -44,7 +46,7 @@ public class GameAccountService {
         }
 
         var gameDictionaryMappings = getGameDictionaryMappings(page.getRecords());
-        var data = converter.convertToPage(page.getRecords(), gameDictionaryMappings::get);
+        var data = converter.convertToPage(page.getRecords(), configuration.getCustomerEndpoint(), gameDictionaryMappings::get);
 
         return PageReply.of(page.getCurrent(), page.getSize(), page.getPages(), data);
     }

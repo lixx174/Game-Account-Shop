@@ -48,4 +48,8 @@ public class GameAccountPageDto {
      * 标题图
      */
     private String img;
+    /**
+     * 网站唯客服跳转链接
+     */
+    private String customerEndpoint;
 }
