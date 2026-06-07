@@ -9,7 +9,9 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.Named;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 /**
  * @author jinx
@@ -35,9 +37,20 @@ public interface GameAccountConverter {
                                      String customerEndpoint,
                                      @Context IdNameResolver resolver);
 
-    Collection<GameAccountPageDto> convertToPage(Collection<GameAccountEntity> entities,
-                                                 String customerEndpoint,
-                                                 @Context IdNameResolver resolver);
+    default Collection<GameAccountPageDto> convertToPage(Collection<GameAccountEntity> entities,
+                                                         String customerEndpoint,
+                                                         @Context IdNameResolver resolver) {
+        if (entities == null) {
+            return Collections.emptyList();
+        }
+
+        Collection<GameAccountPageDto> collection = new ArrayList<>(entities.size());
+        for (GameAccountEntity gameAccountEntity : entities) {
+            collection.add(convertToPage(gameAccountEntity, customerEndpoint, resolver));
+        }
+
+        return collection;
+    }
 
 
     @Named("resolveId")

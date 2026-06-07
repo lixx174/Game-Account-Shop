@@ -13,4 +13,4 @@ spring:
     password: root
 
 qinghaotech:
-  customer-endpoint:
+  customer-endpoint: https://www.taobao.com/
