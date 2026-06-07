@@ -21,6 +21,10 @@ public class GameAccountDetailDto {
      */
     private String title;
     /**
+     * 游戏id
+     */
+    private Integer gameId;
+    /**
      * 账号来源id
      */
     private Integer originId;

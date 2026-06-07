@@ -22,6 +22,10 @@ public class GameAccountPageDto {
      */
     private String title;
     /**
+     * 游戏名称
+     */
+    private String gameName;
+    /**
      * 账号来源
      */
     private String originName;
