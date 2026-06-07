@@ -5,6 +5,8 @@ import com.qinghaotech.application.model.PageReply;
 import com.qinghaotech.application.model.game.account.GameAccountDetailDto;
 import com.qinghaotech.application.model.game.account.GameAccountPageDto;
 import com.qinghaotech.application.model.game.account.GameAccountPageQuery;
+import com.qinghaotech.domain.game.GameEntity;
+import com.qinghaotech.domain.game.GameRepository;
 import com.qinghaotech.domain.game.account.GameAccountEntity;
 import com.qinghaotech.domain.game.account.GameAccountRepository;
 import com.qinghaotech.domain.game.dictionary.GameDictionaryEntity;
@@ -29,6 +31,7 @@ public class GameAccountService {
 
     private final GameAccountRepository repo;
     private final GameDictionaryRepository gdRepo;
+    private final GameRepository gRepo;
     private final GameAccountConverter converter;
 
     public PageReply<GameAccountPageDto> page(GameAccountPageQuery query) {
@@ -50,10 +53,12 @@ public class GameAccountService {
     public GameAccountDetailDto detail(Integer id) {
         GameAccountEntity entity = repo.selectById(id);
         Assert.notNull(entity, "Illegal id: %s".formatted(id));
+        GameEntity game = gRepo.selectById(entity.getGameId());
+        Assert.notNull(game, "Illegal gameId: %s".formatted(entity.getGameId()));
 
         var gameDictionaryMappings = getGameDictionaryMappings(Collections.singleton(entity));
 
-        return converter.convertToDetail(entity, gameDictionaryMappings::get);
+        return converter.convertToDetail(entity, game.getName(), gameDictionaryMappings::get);
     }
 
 

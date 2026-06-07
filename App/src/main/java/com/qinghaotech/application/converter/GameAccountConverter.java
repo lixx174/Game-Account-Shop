@@ -18,12 +18,11 @@ import java.util.Collection;
 public interface GameAccountConverter {
 
     @Mappings({
-            @Mapping(target = "gameName", source = "gameId", qualifiedByName = "resolveId"),
-            @Mapping(target = "originName", source = "originId", qualifiedByName = "resolveId"),
-            @Mapping(target = "serverName", source = "serverId", qualifiedByName = "resolveId"),
-            @Mapping(target = "systemName", source = "systemId", qualifiedByName = "resolveId"),
+            @Mapping(target = "originName", source = "entity.originId", qualifiedByName = "resolveId"),
+            @Mapping(target = "serverName", source = "entity.serverId", qualifiedByName = "resolveId"),
+            @Mapping(target = "systemName", source = "entity.systemId", qualifiedByName = "resolveId"),
     })
-    GameAccountDetailDto convertToDetail(GameAccountEntity entity, @Context IdNameResolver resolver);
+    GameAccountDetailDto convertToDetail(GameAccountEntity entity, String gameName, @Context IdNameResolver resolver);
 
     @Mappings({
             @Mapping(target = "originName", source = "originId", qualifiedByName = "resolveId"),
