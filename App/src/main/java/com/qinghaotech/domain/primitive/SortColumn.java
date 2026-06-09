@@ -14,8 +14,8 @@ public enum SortColumn {
      */
     PUBLISH_TIME {
         @Override
-        public SFunction<GameAccountEntity, String> getColumnFunction() {
-            return e -> "create_at";
+        public SFunction<GameAccountEntity, ?> getColumnFunction() {
+            return GameAccountEntity::getCreateAt;
         }
     },
     /**
@@ -23,8 +23,8 @@ public enum SortColumn {
      */
     PRICE {
         @Override
-        public SFunction<GameAccountEntity, String> getColumnFunction() {
-            return e -> "price";
+        public SFunction<GameAccountEntity, ?> getColumnFunction() {
+            return GameAccountEntity::getPrice;
         }
     };
 
@@ -33,5 +33,5 @@ public enum SortColumn {
      *
      * @return db排序字段名称
      */
-    public abstract SFunction<GameAccountEntity, String> getColumnFunction();
+    public abstract SFunction<GameAccountEntity, ?> getColumnFunction();
 }
